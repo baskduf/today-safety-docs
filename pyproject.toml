@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "today-safety-preprocessing"
+version = "0.1.0"
+description = "Preprocessing pipeline for Today Safety public data assets."
+requires-python = ">=3.11"
+dependencies = [
+  "openpyxl>=3.1",
+  "pandas>=2.2",
+  "pyarrow>=17"
+]
+
+[tool.setuptools]
+py-modules = []

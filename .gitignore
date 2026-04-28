@@ -1,0 +1,7 @@
+data_sources/raw/
+data_sources/intermediate/
+data_sources/processed/
+
+# Generated reports can be regenerated, but keep the current markdown snapshots.
+!data_sources/reports/
+!data_sources/reports/*.md
