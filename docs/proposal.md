@@ -92,7 +92,7 @@
 
 공개 공공데이터만으로 모든 산업군에서 실시간 정밀 사고확률을 예측하는 것은 어렵지만, 작업조건 기반 위험요약, 사고유형 우선순위화, 유사 재해사례 기반 설명, 체크리스트와 브리핑 생성은 충분히 설계 가능하다. 따라서 공모전 단계에서는 `정밀 예측 AI`보다 `공공데이터 기반 위험분석 결과를 행동 가능한 안전문서로 전환하는 AI`라는 포지션이 가장 현실적이다.
 
-자세한 구현 가능성 검토는 [docs/implementation_feasibility_review.md](./docs/implementation_feasibility_review.md)에 정리하였다.
+자세한 구현 가능성 검토는 [implementation_feasibility_review.md](./implementation_feasibility_review.md)에 정리하였다.
 
 ## 12. 결론
 
