@@ -9,7 +9,32 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const reviewDir = path.join(rootDir, "data_sources", "review");
 
-const outputPath = path.join(reviewDir, "taxonomy_review_workbook.xlsx");
+const outputPath = path.join(reviewDir, "taxonomy_review_workbook_minimal.xlsx");
+
+const visibleColumnsBySheet = {
+  "Accident Review": [
+    "review_raw_value",
+    "occurrence_count",
+    "top_industries",
+    "top_jobs",
+    "sample_accident_type_raw",
+    "sample_narrative_text",
+    "proposed_standard_group",
+    "review_status",
+    "review_note",
+  ],
+  "Process Review": [
+    "review_raw_value",
+    "occurrence_count",
+    "top_industries",
+    "top_jobs",
+    "sample_process_raw",
+    "sample_narrative_text",
+    "proposed_standard_group",
+    "review_status",
+    "review_note",
+  ],
+};
 
 const accidentCategories = [
   "추락",
@@ -67,6 +92,12 @@ function toMatrix(rows, headers) {
   return [headers, ...body];
 }
 
+function pickVisibleHeaders(sheetName, rows) {
+  const preferred = visibleColumnsBySheet[sheetName] ?? [];
+  const sourceHeaders = rows.length > 0 ? Object.keys(rows[0]) : [];
+  return preferred.filter((header) => sourceHeaders.includes(header));
+}
+
 function formatWorksheet(sheet, headers, rowCount) {
   const fullRange = `A1:${colLetter(headers.length - 1)}${rowCount + 1}`;
   const headerRange = `A1:${colLetter(headers.length - 1)}1`;
@@ -89,6 +120,20 @@ function formatWorksheet(sheet, headers, rowCount) {
   sheet.freezePanes.freezeRows(1);
   sheet.getRange(fullRange).format.autofitColumns();
   sheet.getRange(fullRange).format.autofitRows();
+  const editableColumns = ["proposed_standard_group", "review_status", "review_note"]
+    .map((name) => headers.indexOf(name))
+    .filter((index) => index >= 0);
+  for (const index of editableColumns) {
+    const col = colLetter(index);
+    sheet.getRange(`${col}1:${col}${rowCount + 1}`).format = {
+      fill: { type: "solid", color: "#FFF2CC" },
+      font: { name: "Calibri", size: 10, color: "tx1", bold: true },
+      borders: { preset: "outside", style: "thin", color: "#D6B656" },
+      wrapText: true,
+      verticalAlignment: "center",
+    };
+    sheet.getRange(`${col}1:${col}${rowCount + 1}`).format.columnWidthPx = index === editableColumns[0] ? 180 : 130;
+  }
 }
 
 function addOverviewSheet(workbook, accidentRows, processRows) {
@@ -135,7 +180,7 @@ async function main() {
     ["Process Review", processRows],
   ]) {
     const sheet = workbook.worksheets.add(sheetName);
-    const headers = rows.length > 0 ? Object.keys(rows[0]) : [];
+    const headers = pickVisibleHeaders(sheetName, rows);
     const matrix = toMatrix(rows, headers);
     const range = `A1:${colLetter(headers.length - 1)}${matrix.length}`;
     sheet.getRange(range).values = matrix;
