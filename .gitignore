@@ -1,6 +1,8 @@
 data_sources/raw/
 data_sources/intermediate/
 data_sources/processed/
+node_modules/
+scripts/__pycache__/
 
 # Generated reports can be regenerated, but keep the current markdown snapshots.
 !data_sources/reports/
