@@ -134,6 +134,24 @@ HAZARD_PATTERNS = [
     ("인양/하역", [r"인양", r"하역", r"상하차", r"중량물"]),
 ]
 
+ACCIDENT_PATTERNS_SUPPLEMENTAL = [
+    ("무리한동작", [r"염좌", r"회전근개", r"관절증", r"반달연골", r"전십자인대", r"인대의 파열", r"충격증후군", r"신경뿌리병증", r"손목터널", r"상과염"]),
+    ("충돌", [r"골절", r"타박상", r"열린 상처", r"열상", r"진탕", r"두피의 열린 상처", r"찢김", r"좌상", r"타박"]),
+    ("끼임", [r"절단", r"압궤", r"으깸", r"절상", r"수지신경의 손상"]),
+    ("화재폭발", [r"화상"]),
+    ("화학물질노출", [r"중독", r"유해물질", r"유기용제", r"질식성 가스"]),
+]
+
+PROCESS_PATTERNS_SUPPLEMENTAL = [
+    ("상하차/물류", [r"택배", r"배달", r"퀵서비스", r"화물차", r"운송", r"배송", r"창고", r"지게차", r"물류", r"상하차"]),
+    ("설치/해체", [r"건설관련 기능", r"건설구조관련", r"비계", r"형틀", r"철근", r"조적", r"해체", r"설치"]),
+    ("굴착/토공", [r"토목", r"채굴", r"굴착", r"굴삭기", r"천공", r"발파"]),
+    ("절단/가공", [r"기계조작원", r"금속공작", r"제관", r"판금", r"목재", r"가구", r"인쇄", r"금형", r"주조", r"단조", r"생산기 조작", r"제조관련"]),
+    ("청소/정리", [r"조리사", r"주방", r"음식서비스", r"음식관련", r"위생"]),
+    ("점검/검사", [r"검침", r"시험원", r"검사원"]),
+    ("보행/이동", [r"경비", r"검표", r"순찰", r"주차"]),
+]
+
 
 @dataclass
 class Paths:
@@ -193,11 +211,11 @@ def standardize_job(text: str) -> tuple[str, str]:
 
 
 def standardize_process(text: str) -> tuple[str, str]:
-    return first_match_category(text, PROCESS_PATTERNS, "기타")
+    return first_match_category(text, PROCESS_PATTERNS + PROCESS_PATTERNS_SUPPLEMENTAL, "기타")
 
 
 def standardize_accident(text: str) -> tuple[str, str]:
-    return first_match_category(text, ACCIDENT_PATTERNS, "기타")
+    return first_match_category(text, ACCIDENT_PATTERNS + ACCIDENT_PATTERNS_SUPPLEMENTAL, "기타")
 
 
 def standardize_hazard(text: str) -> tuple[str, str]:
@@ -443,7 +461,14 @@ def normalize_event_frame(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Cou
         industry_major, industry_match = standardize_industry(coalesce(row.get("industry_minor_raw"), row.get("industry_major_raw"), row.get("industry_raw")))
         job_standard, job_match = standardize_job(row.get("job_title_raw", ""))
         process_standard, process_match = standardize_process(coalesce(row.get("process_raw"), row.get("job_title_raw")))
-        accident_standard, accident_match = standardize_accident(coalesce(row.get("accident_type_raw"), row.get("narrative_text"), row.get("hazard_factor_raw")))
+        accident_standard, accident_match = standardize_accident(
+            coalesce(
+                row.get("accident_type_raw"),
+                row.get("injury_or_disease_type"),
+                row.get("narrative_text"),
+                row.get("hazard_factor_raw"),
+            )
+        )
         hazard_standard, hazard_match = standardize_hazard(coalesce(row.get("hazard_factor_raw"), row.get("narrative_text"), row.get("process_raw")))
 
         stats["industry"][industry_match] += 1

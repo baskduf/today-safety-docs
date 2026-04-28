@@ -10,9 +10,9 @@
 
 ## Coverage
 
-- accident taxonomy coverage: `29.76%`
+- accident taxonomy coverage: `79.51%`
 - industry taxonomy coverage: `83.07%`
-- process taxonomy explicit coverage: `20.26%`
+- process taxonomy explicit coverage: `58.28%`
 
 ## Blank Rates
 
@@ -109,24 +109,39 @@
 
 | Strategy | Count |
 | --- | ---: |
-| `fallback` | 133456 |
+| `fallback` | 69826 |
 | `keyword:가공` | 1962 |
 | `keyword:거푸집` | 4 |
+| `keyword:건설관련 기능` | 8302 |
+| `keyword:건설구조관련` | 929 |
 | `keyword:검사` | 611 |
+| `keyword:검침` | 217 |
+| `keyword:경비` | 1433 |
+| `keyword:굴삭기` | 5 |
 | `keyword:굴착` | 110 |
+| `keyword:금속공작` | 347 |
+| `keyword:금형` | 256 |
+| `keyword:기계조작원` | 2700 |
 | `keyword:도금` | 467 |
 | `keyword:도장` | 158 |
 | `keyword:리프트` | 82 |
 | `keyword:마감` | 1316 |
+| `keyword:목재` | 440 |
 | `keyword:방수` | 80 |
 | `keyword:배관` | 843 |
+| `keyword:배달` | 981 |
 | `keyword:배송` | 68 |
 | `keyword:비계` | 98 |
 | `keyword:상하차` | 136 |
+| `keyword:생산기 조작` | 727 |
 | `keyword:설치` | 2526 |
 | `keyword:수리` | 19 |
+| `keyword:시험원` | 77 |
 | `keyword:용접` | 2317 |
 | `keyword:운반` | 340 |
+| `keyword:운송` | 2414 |
+| `keyword:음식관련` | 4538 |
+| `keyword:음식서비스` | 4647 |
 | `keyword:이동` | 336 |
 | `keyword:인양` | 205 |
 | `keyword:전기` | 5381 |
@@ -134,23 +149,36 @@
 | `keyword:점검` | 463 |
 | `keyword:정리` | 9 |
 | `keyword:정비` | 1120 |
+| `keyword:제관` | 285 |
+| `keyword:제조관련` | 17026 |
+| `keyword:조리사` | 7521 |
 | `keyword:조립` | 1229 |
+| `keyword:주차` | 1 |
+| `keyword:지게차` | 149 |
+| `keyword:채굴` | 529 |
+| `keyword:천공` | 1 |
+| `keyword:철근` | 104 |
 | `keyword:청소` | 8878 |
+| `keyword:퀵서비스` | 6692 |
 | `keyword:크레인` | 302 |
 | `keyword:택배` | 1317 |
 | `keyword:토공` | 73 |
+| `keyword:토목` | 651 |
 | `keyword:통행` | 132 |
 | `keyword:폐기물` | 8 |
 | `keyword:하역` | 2439 |
 | `keyword:해체` | 334 |
+| `keyword:화물차` | 2658 |
 | `keyword:화학` | 460 |
 
 ### accident
 
 | Strategy | Count |
 | --- | ---: |
-| `fallback` | 117555 |
+| `fallback` | 34299 |
 | `keyword:감전` | 127 |
+| `keyword:골절` | 52681 |
+| `keyword:관절증` | 1878 |
 | `keyword:교통` | 30 |
 | `keyword:긴장` | 1 |
 | `keyword:끼` | 706 |
@@ -160,32 +188,46 @@
 | `keyword:떨어짐` | 516 |
 | `keyword:무너` | 18 |
 | `keyword:무리` | 35 |
+| `keyword:반달연골` | 1557 |
 | `keyword:부딪` | 204 |
 | `keyword:붕괴` | 185 |
 | `keyword:비래` | 47 |
+| `keyword:상과염` | 799 |
+| `keyword:손목터널` | 283 |
+| `keyword:수지신경의 손상` | 392 |
+| `keyword:신경뿌리병증` | 323 |
 | `keyword:연소` | 6 |
+| `keyword:열린 상처` | 6402 |
+| `keyword:열상` | 5441 |
 | `keyword:염좌` | 17068 |
 | `keyword:요추` | 3188 |
 | `keyword:용제` | 3 |
 | `keyword:유해` | 53 |
 | `keyword:으깸` | 2988 |
+| `keyword:인대의 파열` | 3246 |
 | `keyword:적재물` | 4 |
 | `keyword:전기` | 1 |
 | `keyword:전도` | 227 |
+| `keyword:전십자인대` | 863 |
 | `keyword:절단` | 3522 |
 | `keyword:접촉` | 155 |
 | `keyword:중독` | 17 |
 | `keyword:중량물` | 1 |
+| `keyword:진탕` | 1205 |
 | `keyword:질식` | 39 |
+| `keyword:찢김` | 74 |
 | `keyword:차량` | 22 |
 | `keyword:추락` | 2215 |
 | `keyword:출퇴근` | 10508 |
+| `keyword:충격증후군` | 378 |
 | `keyword:충돌` | 37 |
+| `keyword:타박상` | 3515 |
 | `keyword:폭발` | 25 |
 | `keyword:협착` | 1218 |
 | `keyword:화상` | 5982 |
 | `keyword:화재` | 131 |
 | `keyword:화학` | 29 |
+| `keyword:회전근개` | 4219 |
 
 ### hazard
 
@@ -244,7 +286,6 @@
 | `15140383` | `sif_manufacturing-7` | 지붕, 천장 등 위에서 작업 |
 | `15140383` | `sif_manufacturing-8` | 지붕, 천장 등 위에서 작업 |
 | `15140383` | `sif_manufacturing-9` | 위험물질 취급 또는 그 장소에서 작업 |
-| `15140383` | `sif_manufacturing-11` | 지게차 사용 작업 |
 | `15140383` | `sif_manufacturing-13` | 혼재작업(작업자-작업차량) |
 | `15140383` | `sif_manufacturing-14` | 혼재작업(작업자-작업차량) |
 | `15140383` | `sif_manufacturing-16` | 지붕, 천장 등 위에서 작업 |
@@ -261,3 +302,4 @@
 | `15140383` | `sif_manufacturing-39` | 원료 투입 작업 |
 | `15140383` | `sif_manufacturing-40` | 원료 투입 작업 |
 | `15140383` | `sif_manufacturing-41` | 보일러, 공기압축기, 기타 설비 등 사용작업 |
+| `15140383` | `sif_manufacturing-43` | 위험물질 취급 또는 그 장소에서 작업 |
